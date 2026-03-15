@@ -58,7 +58,7 @@ public class LatGui extends javax.swing.JFrame {
         jButton2.setText("Hapus");
         jButton2.addActionListener(this::jButton2ActionPerformed);
 
-        jButton3.setText("Exit");
+        jButton3.setText("Keluar");
         jButton3.addActionListener(this::jButton3ActionPerformed);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
