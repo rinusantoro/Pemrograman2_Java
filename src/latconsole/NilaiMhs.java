@@ -8,7 +8,7 @@ import java.util.Scanner;
 
 /**
  *
- * @author Lenovo
+ * @author Sonasa Rinusantoro
  */
 public class NilaiMhs {
      public static void main (String [] args){
