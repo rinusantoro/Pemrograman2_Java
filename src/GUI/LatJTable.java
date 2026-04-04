@@ -129,6 +129,8 @@ public class LatJTable extends javax.swing.JFrame {
     String nama = jTextField2.getText();
     String nilai = jTextField3.getText();
     
+    Object data[] = {nim,nama,nilai};
+    
 // validasi
     if(nim.isEmpty() || nama.isEmpty() || nilai.isEmpty()){
         javax.swing.JOptionPane.showMessageDialog(this, "Data tidak boleh kosong!");
@@ -140,8 +142,9 @@ public class LatJTable extends javax.swing.JFrame {
     model.setRowCount(0);
     
     // tambah data ke tabel
-    model.addRow(new Object[]{nim, nama, nilai});
-
+    //model.addRow(new Object[]{nim, nama, nilai});
+    model.addRow(data);
+    
     // reset field
     jTextField1.setText("");
     jTextField2.setText("");
