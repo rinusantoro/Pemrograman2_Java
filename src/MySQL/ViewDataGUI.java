@@ -6,10 +6,12 @@ import java.awt.*;
 import java.awt.event.*;
 import java.sql.*;
 import java.io.File;
+import java.util.HashMap;
+import java.util.Map;
+
 
 // Import untuk JasperReports
-import net.sf.jasperreports.engine.JasperFillManager;
-import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.engine.*;
 import net.sf.jasperreports.view.JasperViewer;
 
 /**
@@ -141,17 +143,32 @@ public class ViewDataGUI extends JFrame {
 
         // --- TOMBOL CETAK REPORT ---
         btnPrint.addActionListener(e -> {
+            File dir1   = new File(".");
+            String dirr = dir1.getAbsolutePath();
+            String reportPath = dirr + File.separator + "src"
+                + File.separator + "MySQL"
+                + File.separator + "LaporanMahasiswa.jrxml";
+        
             try {
-                // Lokasi file .jasper (Pastikan file ini ada di folder project)
-                // Jika file .jasper ada di root project, cukup tulis "report_mhs.jasper"
-                File reportFile = new File("src/MySQL/laporan_mhs.jasper");
-                String path = reportFile.getAbsolutePath();
-                
-                JasperPrint jp = JasperFillManager.fillReport(path, null, con);
-                JasperViewer.viewReport(jp, false); // false agar aplikasi utama tidak tertutup saat report di-close
+            // Compile .jrxml menjadi .jasper
+            JasperReport jasperReport = JasperCompileManager.compileReport(reportPath);
+
+            // Parmeter
+            Map<String, Object> parameters = new HashMap<>();
+            parameters.put("judul", "Daftar Data Mahasiswa");
+
+            // Fill isi report nya
+            JasperPrint jasperPrint = JasperFillManager.fillReport(
+            jasperReport, parameters, con
+            );
+
+            // View - JasperViewer
+            JasperViewer.viewReport(jasperPrint, false);
+
             } catch (Exception ex) {
-                JOptionPane.showMessageDialog(null, "Gagal Mencetak: " + ex.getMessage());
-                ex.printStackTrace();
+                JOptionPane.showMessageDialog(this,
+                "Gagal memproses laporan!\n" + ex.getMessage(),
+                "Error JasperReports", JOptionPane.ERROR_MESSAGE);       
             }
         });
 
