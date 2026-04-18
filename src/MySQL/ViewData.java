@@ -31,7 +31,7 @@ public class ViewData {
           
             
             // INSERT a record
-            String sqlInsert = "insert into datamhs values ('02291', 'Unpam', '3', 'C')";
+            String sqlInsert = "insert into datamhs values ('02293', 'Budi', '4', 'C')";
             System.out.println("The SQL statement is: " + sqlInsert + "\n");  // Echo for debugging
             int countInserted;
             countInserted = stm.executeUpdate(sqlInsert);
@@ -39,10 +39,17 @@ public class ViewData {
          
             // Update a record 
             String strUpdate;
-            strUpdate = "update datamhs set nama = 'Sonasa', kelas = 'Reg B' where nim = '02289'";
+            strUpdate = "update datamhs set nama = 'Joko', kelas = 'B' where nim = '02293'";
             System.out.println("The SQL statement is: " + strUpdate + "\n");  // Echo for debugging
             int countUpdated = stm.executeUpdate(strUpdate);
             System.out.println(countUpdated + " records affected.\n");
+            
+            // Delete a record 
+            String strDelete;
+            strDelete = "delete from datamhs where nim = '02293'";
+            System.out.println("The SQL statement is: " + strDelete + "\n");  // Echo for debugging
+            boolean countDeleted = stm.execute(strDelete);
+            System.out.println(countDeleted + " records affected.\n");
             
             // buat query ke database
             String sql = "SELECT * FROM datamhs";
